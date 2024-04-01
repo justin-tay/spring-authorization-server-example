@@ -1,0 +1,3 @@
+# Http Configurer
+org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer=\
+com.example.app.authorization.server.config.AuthorizationServerConfigurer

@@ -1,0 +1,41 @@
+debug:
+  true
+
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: trace
+
+app:
+  jwks: classpath:jwks.json
+
+spring:
+  application:
+    name: spring-authorization-server-example
+  security:
+    user:
+      name: user1
+      password: password
+    oauth2:
+      authorizationserver:
+        client:
+          keycloak-client:
+            jwk-set-uri: http://localhost:8080/realms/test/protocol/openid-connect/certs
+            token:
+              id-token-signature-algorithm: ES512
+            token-endpoint-authentication-signing-algorithm: RS256
+            registration:
+              client-id: keycloak-client
+              client-authentication-methods:
+                - private_key_jwt
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+                - client_credentials
+              redirect-uris:
+                - http://localhost:8080/realms/test/broker/spring-authorization-server/endpoint
+              scopes:
+                - openid
+            require-authorization-consent: true
